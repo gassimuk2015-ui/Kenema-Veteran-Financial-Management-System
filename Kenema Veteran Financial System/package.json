@@ -1,0 +1,10 @@
+{
+  "name": "kenema-veteran-financial-system",
+  "version": "1.0.0",
+  "description": "Kenema Veteran Financial Management System - tracks membership monthly contributions, membership status and expenditures.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "license": "MIT"
+}

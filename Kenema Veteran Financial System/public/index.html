@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kenema Veteran Financial Management System</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<!-- ============ LOGIN VIEW ============ -->
+<div id="loginView" class="login-wrap hidden">
+  <div class="login-card">
+    <div class="login-logo">KVFMS</div>
+    <h1>Kenema Veteran Financial Management System</h1>
+    <p class="muted">Sign in to continue</p>
+    <form id="loginForm">
+      <input type="text" id="loginUsername" placeholder="Username" autocomplete="username" required>
+      <input type="password" id="loginPassword" placeholder="Password" autocomplete="current-password" required>
+      <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+      <p id="loginError" class="error hidden"></p>
+    </form>
+  </div>
+</div>
+
+<!-- ============ APP VIEW ============ -->
+<div id="appView" class="hidden">
+  <header class="topbar">
+    <div class="brand">KVFMS <span class="brand-sub">Kenema Veteran Financial Management System</span></div>
+    <div class="topbar-right">
+      <span id="currentUser" class="muted"></span>
+      <button id="logoutBtn" class="btn btn-ghost">Logout</button>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-view="dashboard">Dashboard</button>
+    <button class="tab" data-view="members">Members</button>
+    <button class="tab" data-view="contributions">Contributions</button>
+    <button class="tab" data-view="expenditures">Expenditures</button>
+    <button class="tab admin-only" data-view="users">User Accounts</button>
+  </nav>
+
+  <main class="container">
+
+    <!-- ===== DASHBOARD ===== -->
+    <section id="view-dashboard" class="view">
+      <h2>Dashboard</h2>
+      <div class="cards" id="dashCards"></div>
+
+      <div class="panel">
+        <h3>Last 6 Months — Collections vs Expenditures</h3>
+        <table class="table" id="monthsTable">
+          <thead><tr><th>Month</th><th>Collected</th><th>Spent</th><th>Payments Made</th><th>Net</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <div class="panel">
+        <h3>Membership Status Summary</h3>
+        <div id="statusCounts" class="chips"></div>
+      </div>
+
+      <div class="panel">
+        <h3 id="arrearsTitle">Members Not Yet Paid This Month</h3>
+        <table class="table" id="arrearsTable">
+          <thead><tr><th>Member</th><th>Phone</th><th>Monthly Dues</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== MEMBERS ===== -->
+    <section id="view-members" class="view hidden">
+      <div class="section-head">
+        <h2>Members</h2>
+        <button class="btn btn-primary" onclick="openMemberModal()">+ Add Member</button>
+      </div>
+      <div class="filters">
+        <input type="text" id="memberSearch" placeholder="Search name or phone...">
+        <select id="memberStatusFilter">
+          <option value="">All statuses</option>
+          <option>Active</option><option>Inactive</option><option>Suspended</option><option>Deceased</option>
+        </select>
+      </div>
+      <table class="table" id="membersTable">
+        <thead><tr><th>Name</th><th>Phone</th><th>Joined</th><th>Monthly Dues</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- ===== CONTRIBUTIONS ===== -->
+    <section id="view-contributions" class="view hidden">
+      <div class="section-head">
+        <h2>Monthly Contributions</h2>
+        <button class="btn btn-primary" onclick="openContribModal()">+ Record Payment</button>
+      </div>
+      <div class="filters">
+        <select id="contribMemberFilter"><option value="">All members</option></select>
+        <input type="month" id="contribPeriodFilter">
+      </div>
+      <table class="table" id="contribTable">
+        <thead><tr><th>Member</th><th>Period</th><th>Amount</th><th>Date Paid</th><th>Method</th><th>Recorded By</th><th>Actions</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- ===== EXPENDITURES ===== -->
+    <section id="view-expenditures" class="view hidden">
+      <div class="section-head">
+        <h2>Expenditures</h2>
+        <button class="btn btn-primary" onclick="openExpendModal()">+ Add Expenditure</button>
+      </div>
+      <div class="filters">
+        <input type="month" id="expendPeriodFilter">
+      </div>
+      <table class="table" id="expendTable">
+        <thead><tr><th>Date</th><th>Description</th><th>Category</th><th>Amount</th><th>Recorded By</th><th>Actions</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- ===== USERS (admin only) ===== -->
+    <section id="view-users" class="view hidden">
+      <div class="section-head">
+        <h2>User Accounts</h2>
+        <button class="btn btn-primary" onclick="openUserModal()">+ Create Login Account</button>
+      </div>
+      <p class="muted">Only the Administrator can create or remove login accounts.</p>
+      <table class="table" id="usersTable">
+        <thead><tr><th>Username</th><th>Full Name</th><th>Role</th><th>Created</th><th>Actions</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+  </main>
+</div>
+
+<!-- ============ MODALS ============ -->
+<dialog id="modal" class="modal">
+  <form id="modalForm" method="dialog">
+    <h3 id="modalTitle"></h3>
+    <div id="modalFields"></div>
+    <p id="modalError" class="error hidden"></p>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+      <button type="submit" class="btn btn-primary" id="modalSave">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<div id="toast" class="toast hidden"></div>
+
+<script src="/app.js"></script>
+</body>
+</html>

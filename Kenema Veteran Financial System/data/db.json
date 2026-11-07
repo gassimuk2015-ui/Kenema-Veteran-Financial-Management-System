@@ -1,0 +1,41 @@
+{
+  "users": [
+    {
+      "id": "09951024-71fd-4862-96a4-2b66efb094c4",
+      "username": "admin",
+      "fullName": "System Administrator",
+      "role": "admin",
+      "salt": "1644c3c6bf5eb9be7373d9d5da678d89",
+      "passwordHash": "f626a1b6eddded13c994a6ca93a7a27006a0145c794359ea69362a1b0daee19f8715e937ee0b0254d012299b462d3bd0e9d978495c14bbc1ea13aa024198f843",
+      "createdAt": "2026-10-29T00:24:09.008Z"
+    }
+  ],
+  "members": [],
+  "contributions": [],
+  "expenditures": [],
+  "sessions": {
+    "e2b2f59730a47768ef9d9cd9b05bc7c301e23de805afd99dcd83ea6ca1ff601c": {
+      "userId": "09951024-71fd-4862-96a4-2b66efb094c4",
+      "username": "admin",
+      "role": "admin",
+      "expiresAt": 1793725756938
+    },
+    "2122a23ae30995f58f6a09dfc521d56b1f687466132d6f7ff10d87c111e29f36": {
+      "userId": "09951024-71fd-4862-96a4-2b66efb094c4",
+      "username": "admin",
+      "role": "admin",
+      "expiresAt": 1793725867610
+    },
+    "090143fe830911b3d9b750f7b8e58df0b8dc2e0bf15ff1a3ccc7d68c22be8ed2": {
+      "userId": "09951024-71fd-4862-96a4-2b66efb094c4",
+      "username": "admin",
+      "role": "admin",
+      "expiresAt": 1793725868443
+    }
+  },
+  "settings": {
+    "appName": "Kenema Veteran Financial Management System",
+    "currency": "NLe",
+    "adminInitialized": true
+  }
+}
